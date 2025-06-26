@@ -1,0 +1,35 @@
+﻿@model BooksWebApp.Application.ViewModels.ReviewViewModel
+
+@{
+    ViewData["Title"] = "Add Review";
+    var bookId = ViewBag.BookId;
+    var bookTitle = ViewBag.BookTitle;
+}
+
+<h2>Add Review for @bookTitle</h2>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="BookId" />
+
+
+    <div class="form-group">
+        <label for="content">Review</label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="rating">Rating (1–5)</label>
+        <input asp-for="Rating" type="number" class="form-control" min="1" max="5" />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

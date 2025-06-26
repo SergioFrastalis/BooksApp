@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BooksWebApp.Core.Entities.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+}
+
+<form method="get" asp-action="Index" class="mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <label>Genre</label>
+            <input type="text" name="genre" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label>Published Year</label>
+            <input type="number" name="year" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label>Minimum Rating</label>
+            <input type="number" name="minRating" class="form-control" step="0.1" min="1" max="5" />
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishedYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishedYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span class="text-muted">|</span>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
+                        <span class="text-muted">|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+
+        </tr>
+}
+    </tbody>
+</table>
