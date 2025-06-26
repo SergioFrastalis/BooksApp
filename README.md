@@ -55,7 +55,4 @@ All database work uses **EF Core Code-First**
 
 HOW TO RUN: 
 
-1. Clone the repo
-2. Set up a connection string in appsettings.json
-3. Run migrations (dotnet ef database update)
-4. Start the project 
+Simplest way is to just clone with Visual Studio 2022 and run it. No extra setup needed.
